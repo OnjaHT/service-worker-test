@@ -1,9 +1,8 @@
 if ('serviceWorker' in navigator) {
-    var folder = '/service-worker-test/';
     navigator.serviceWorker.register( 
-        folder + 'sw.js', 
+        '/service-worker-test/service-worker.js', 
         { 
-            scope: folder 
+            scope: '/service-worker-test/' 
         }
     ).then(function(reg) {
         if (reg.installing) {
