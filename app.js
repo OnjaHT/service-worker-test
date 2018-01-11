@@ -13,7 +13,12 @@ if ('serviceWorker' in navigator) {
             console.log('Service worker active');
         }
 
-        console.log( serviceWorker.controller );
+        if ( navigator.serviceWorker.controller ) {
+            navigator.serviceWorker.controller.postMessage('Hello world from App.js');
+        } else {
+            console.log('serviceWorker.controller invalide');
+        }
+        console.log()
     }).catch(function(error) {
         // registration failed
         console.log('Registration failed with ' + error);
