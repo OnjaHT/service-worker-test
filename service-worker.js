@@ -30,7 +30,7 @@ self.addEventListener('activate', function() {
 self.addEventListener('fetch', function(event) {
     console.log('Fetch [' + event.request.url + ']');
     if ( event.request.url == 'https://onjaharitiana.github.io/service-worker-test/app.js' ) {
-        console.log('Fetch App');
+        console.log('Fetch => App.js');
         return;
     }
 
