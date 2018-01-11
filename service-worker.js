@@ -8,14 +8,7 @@ var CACHE_VERSION = '1.0';
  * @since 1.0.0
  */
 self.addEventListener('install', function(event) {
-    clients.matchAll()
-    .then(function(client) {
-        console.log('CLIENT => ', client);
-        client.postMessage('Hello world');
-    })
-    .catch(function() {
-        console.log('Aucun client');
-    });
+    
 });
 
 
