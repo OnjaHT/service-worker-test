@@ -13,7 +13,7 @@ if ('serviceWorker' in navigator) {
             console.log('Service worker active');
         }
 
-        console.log('App > navigator.serviceWorker.controller > ', navigator.serviceWorker.controller):
+        console.log('App > navigator.serviceWorker.controller > ', navigator.serviceWorker.controller);
         if ( navigator.serviceWorker.controller ) {
             navigator.serviceWorker.controller.postMessage('Hello world from App.js');
         } else {
