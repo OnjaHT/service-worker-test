@@ -40,33 +40,37 @@ self.addEventListener('activate', function(event) {
  * @since 1.0.0
  */
 self.addEventListener('fetch', function(event) {
-    console.log(' ------------- event.request --------------------- ', event.request);
+    let request = event.request;
+
+    if ( request.method !== 'GET' ) {
+        return;
+    }
 
     event.respondWith(
         //Retourne l'objet en cache
-        caches.match(event.request)
+        caches.match(request)
         .then(function(response) {
             
             if ( response !== undefined ) {
-                console.log('FETCH > Ressource en cache => ', event.request.url );
+                console.log('FETCH > Ressource en cache => ', request.url );
                 return response;
             }
 
             //Recupere l'objet depuis son URL
-            return fetch(event.request)
+            return fetch(request)
             .then(function(response) { //Si pas d'erreur 
                 let responseClone = response.clone();
 
                 caches.open(CACHE_VERSION) //On ouvre le cache
                 .then(function(cache) {
-                    cache.put(event.request, responseClone); //On l'ajoute au cache
+                    cache.put(request, responseClone); //On l'ajoute au cache
                 })
                 .catch(function() {
                     console.log('FETCH > Error open cache');
                 });
             })
             .catch(function() { //Si la resource n'est pas accessible
-                console.log('FETCH > Error 404 => ', event.request);
+                console.log('FETCH > Error 404 => ', request);
                 return Response.error();
             });
         })
