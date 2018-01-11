@@ -7,8 +7,8 @@ var CACHE_VERSION = '1.0';
  * 
  * @since 1.0.0
  */
-self.addEventListener('install', function() {
-
+self.addEventListener('install', function(event) {
+    postMessage('Service Worker installé');
 });
 
 

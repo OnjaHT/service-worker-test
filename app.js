@@ -12,6 +12,10 @@ if ('serviceWorker' in navigator) {
         } else if (reg.active) {
             console.log('Service worker active');
         }
+
+        reg.addEventListener('message', function(e) {
+            console.log('Registration message : ', e.data);
+        });
     }).catch(function(error) {
         // registration failed
         console.log('Registration failed with ' + error);
