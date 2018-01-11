@@ -1,29 +1,61 @@
 if ('serviceWorker' in navigator) {
+    //Enregistrement et lancement du service Worker
     navigator.serviceWorker.register( 
         '/service-worker-test/service-worker.js'/*?v=' + Date.now()*/, 
         { 
             scope: '/service-worker-test/' 
         }
-    ).then(function(reg) {
-        if (reg.installing) {
-            console.log('Service worker installing');
-        } else if (reg.waiting) {
-            console.log('Service worker installed');
-        } else if (reg.active) {
-            console.log('Service worker active');
-        }
-
+    ).then(function(serviceWorkerRegistration) {
         //
         navigator.serviceWorker.addEventListener('message', function(e) {
             console.log('On App.js message: ', e.data);
         });
         
-        // if ( reg.active ) {
-        //     reg.active.postMessage('Hello world from App.js');
+        // if ( serviceWorkerRegistration.active ) {
+        //     serviceWorkerRegistration.active.postMessage('Hello world from App.js');
         // }
+
+        subscribeToPush();
 
     }).catch(function(error) {
         // registration failed
         console.log('Registration failed with ' + error);
     });
+
+    /**
+     * Enregistre les service worker au Push
+     * 
+     * @since 1.0.0
+     */
+    function subscribeToPush() {
+        navigator.serviceWorker.ready
+        .then(function(serviceWorkerRegistration) {
+            // Demande d'inscription au Push Server
+            return serviceWorkerRegistration.pushManager.subscribe({ 
+                userVisibleOnly: true 
+            });
+        }).then(function(subscription) {
+            console.log('Subscription Push Server', subscription);
+
+            //sauvegarde de l'inscription dans sur le serveur (serveur du site)
+            fetch(ROOT_URL + '/register-to-notification', {
+                method: 'post',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'same-origin',
+                body: JSON.stringify(subscription)
+            })
+            .then(function(response) {
+                return response.json();
+            }).catch(function (err) {
+                console.log('Could not register subscription into app server', err);
+            });
+        })
+        .catch(function(subscriptionErr) {
+            // Check for a permission prompt issue
+            console.log('Subscription failed ', subscriptionErr);
+        });
+    }
 }
