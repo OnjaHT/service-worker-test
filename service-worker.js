@@ -1,5 +1,7 @@
 // console.log('Service worker', this);
 
+console.log('NAvigator', navigator);
+
 var CACHE_VERSION = '1.0';
 
 /**
