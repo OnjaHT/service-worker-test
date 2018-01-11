@@ -1,7 +1,5 @@
 // console.log('Service worker', this);
 
-console.log('NAvigator', navigator);
-
 var CACHE_VERSION = '1.0';
 
 /**
@@ -87,6 +85,16 @@ self.addEventListener('fetch', function(event) {
  */
 self.addEventListener('message', function(e) {
     console.log('On SW message: ', e.data);
+
+    clients.matchAll({
+        type: 'window'
+    })
+    .then(function(clientList) {
+        console.log('Client List,', clientList);
+        clientList.forEach(function(client) {
+            client.postMessage('Hello from WS');
+        })
+    });
 });
 
 /**
