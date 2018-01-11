@@ -16,6 +16,9 @@ if ('serviceWorker' in navigator) {
         reg.addEventListener('message', function(e) {
             console.log('Registration message : ', e.data);
         });
+        if ( reg.active ) {
+            reg.active.postMessage('Hello world from App.js');
+        }
     }).catch(function(error) {
         // registration failed
         console.log('Registration failed with ' + error);

@@ -84,7 +84,7 @@ self.addEventListener('fetch', function(event) {
  * @since 1.0.0
  */
 self.addEventListener('message', function(e) {
-
+    console.log('On SW message: ', e.data);
 });
 
 /**
