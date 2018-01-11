@@ -18,7 +18,19 @@ self.addEventListener('install', function(event) {
  * @since 1.0.0
  */
 self.addEventListener('activate', function() {
-    
+    event.waitUntil(
+        //Lors de l'activation service, on supprime les anciens caches
+        caches.keys()
+        .then(function(cacheNames) {
+            return Promise.all(
+                cacheNames.filter(function(cacheName) {
+                    return cacheName != CACHE_VERSION
+                }).map(function(cacheName) {
+                    return caches.delete(cacheName);
+                })
+            );
+        })
+    );
 });
 
 
@@ -28,11 +40,7 @@ self.addEventListener('activate', function() {
  * @since 1.0.0
  */
 self.addEventListener('fetch', function(event) {
-    // console.log('Fetch [' + event.request.url + ']');
-    if ( event.request.url == 'https://onjaharitiana.github.io/service-worker-test/app.js' ) {
-        console.log('Fetch => App.js');
-        return;
-    }
+    console.log(' ------------- event.request --------------------- ', event.request);
 
     event.respondWith(
         //Retourne l'objet en cache
