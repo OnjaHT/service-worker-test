@@ -29,13 +29,18 @@ self.addEventListener('activate', function() {
  */
 self.addEventListener('fetch', function(event) {
     console.log('Fetch [' + event.request.url + ']');
+    if ( event.request.url == 'https://onjaharitiana.github.io/service-worker-test/app.js' ) {
+        console.log('Fetch App');
+        return;
+    }
+
     event.respondWith(
         //Retourne l'objet en cache
         caches.match(event.request)
         .then(function(response) {
             
             if ( response !== undefined ) {
-                console.log('FETCH > Ressource en cache => ', event.request );
+                console.log('FETCH > Ressource en cache => ', event.request.url );
                 return response;
             }
 
