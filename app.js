@@ -13,9 +13,6 @@ if ('serviceWorker' in navigator) {
             console.log('Service worker active');
         }
 
-        reg.addEventListener('message', function(e) {
-            console.log('Registration message : ', e.data);
-        });
         if ( reg.active ) {
             reg.active.postMessage('Hello world from App.js');
         }
