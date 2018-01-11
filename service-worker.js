@@ -28,7 +28,7 @@ self.addEventListener('activate', function() {
  * @since 1.0.0
  */
 self.addEventListener('fetch', function(event) {
-    console.log('Fetch [' + event.request + ']')
+    console.log('Fetch [' + event.request.url + ']');
     event.respondWith(
         //Retourne l'objet en cache
         caches.match(event.request)
@@ -54,7 +54,7 @@ self.addEventListener('fetch', function(event) {
             })
             .catch(function() { //Si la resource n'est pas accessible
                 console.log('FETCH > Error 404 => ', event.request);
-                throw new Error('FETCH > Error 404 => ', event.request);
+                return Response.error();
             });
         })
     );
