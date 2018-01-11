@@ -17,7 +17,7 @@ self.addEventListener('install', function(event) {
  * 
  * @since 1.0.0
  */
-self.addEventListener('activate', function() {
+self.addEventListener('activate', function(event) {
     event.waitUntil(
         //Lors de l'activation service, on supprime les anciens caches
         caches.keys()
