@@ -93,7 +93,7 @@ self.addEventListener('message', function(e) {
         console.log('Client List,', clientList);
         clientList.forEach(function(client) {
             client.postMessage('Hello from WS');
-        })
+        });
     });
 });
 
