@@ -28,7 +28,7 @@ self.addEventListener('activate', function() {
  * @since 1.0.0
  */
 self.addEventListener('fetch', function(event) {
-    console.log('Fetch [' + event.request.url + ']');
+    // console.log('Fetch [' + event.request.url + ']');
     if ( event.request.url == 'https://onjaharitiana.github.io/service-worker-test/app.js' ) {
         console.log('Fetch => App.js');
         return;
