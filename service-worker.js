@@ -52,7 +52,7 @@ self.addEventListener('fetch', function(event) {
         .then(function(response) {
             
             if ( response !== undefined ) {
-                console.log('FETCH > Ressource en cache => ', request.url );
+                // console.log('FETCH > Ressource en cache => ', request.url );
                 return response;
             }
 
@@ -70,7 +70,7 @@ self.addEventListener('fetch', function(event) {
                 });
             })
             .catch(function() { //Si la resource n'est pas accessible
-                console.log('FETCH > Error 404 => ', request);
+                // console.log('FETCH > Error 404 => ', request);
                 return Response.error();
             });
         })
@@ -86,15 +86,15 @@ self.addEventListener('fetch', function(event) {
 self.addEventListener('message', function(e) {
     console.log('On SW message: ', e.data);
 
-    clients.matchAll({
-        type: 'window'
-    })
-    .then(function(clientList) {
-        console.log('Client List,', clientList);
-        clientList.forEach(function(client) {
-            client.postMessage('Hello from WS');
-        });
-    });
+    // clients.matchAll({
+    //     type: 'window'
+    // })
+    // .then(function(clientList) {
+    //     console.log('Client List,', clientList);
+    //     clientList.forEach(function(client) {
+    //         client.postMessage('Hello from WS');
+    //     });
+    // });
 });
 
 /**

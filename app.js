@@ -13,13 +13,14 @@ if ('serviceWorker' in navigator) {
             console.log('Service worker active');
         }
 
+        //
         navigator.serviceWorker.addEventListener('message', function(e) {
             console.log('On App.js message: ', e.data);
         });
         
-        if ( reg.active ) {
-            reg.active.postMessage('Hello world from App.js');
-        }
+        // if ( reg.active ) {
+        //     reg.active.postMessage('Hello world from App.js');
+        // }
 
     }).catch(function(error) {
         // registration failed
