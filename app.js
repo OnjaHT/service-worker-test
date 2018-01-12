@@ -36,22 +36,23 @@ if ('serviceWorker' in navigator) {
             });
         }).then(function(subscription) {
             console.log('Subscription Push Server', subscription);
+            console.log('JSON.stringify(subscription)', JSON.stringify(subscription));
 
             //sauvegarde de l'inscription dans sur le serveur (serveur du site)
-            fetch(ROOT_URL + '/register-to-notification', {
-                method: 'post',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'same-origin',
-                body: JSON.stringify(subscription)
-            })
-            .then(function(response) {
-                return response.json();
-            }).catch(function (err) {
-                console.log('Could not register subscription into app server', err);
-            });
+            // fetch(ROOT_URL + '/register-to-notification', {
+            //     method: 'post',
+            //     headers: {
+            //         'Accept': 'application/json',
+            //         'Content-Type': 'application/json'
+            //     },
+            //     credentials: 'same-origin',
+            //     body: JSON.stringify(subscription)
+            // })
+            // .then(function(response) {
+            //     return response.json();
+            // }).catch(function (err) {
+            //     console.log('Could not register subscription into app server', err);
+            // });
         })
         .catch(function(subscriptionErr) {
             // Check for a permission prompt issue
