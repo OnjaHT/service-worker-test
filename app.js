@@ -30,9 +30,19 @@ if ('serviceWorker' in navigator) {
     function subscribeToPush() {
         navigator.serviceWorker.ready
         .then(function(serviceWorkerRegistration) {
-            // Demande d'inscription au Push Server
-            return serviceWorkerRegistration.pushManager.subscribe({ 
-                userVisibleOnly: true 
+            //Retourne la subscription existant si existe
+            return serviceWorkerRegistration.pushManager.getSubscription()
+            .then(function(subscription) {
+                console.log('Déjà inscrit, ', subscription);
+                if ( subscription ) {
+                    return subscription;
+                }
+
+                console.log('Pas encore inscrit');
+                // Demande d'inscription au Push Server
+                return serviceWorkerRegistration.pushManager.subscribe({ 
+                    userVisibleOnly: true 
+                });
             });
         }).then(function(subscription) {
             console.log('Subscription Push Server', subscription);
