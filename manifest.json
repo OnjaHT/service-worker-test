@@ -19,6 +19,8 @@
 
   "name": "Service Worker",
 
+  "gcm_sender_id": "383431240396",
+
   "permissions": [
       "webNavigation",
       "geolocation",

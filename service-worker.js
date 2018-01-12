@@ -103,5 +103,5 @@ self.addEventListener('message', function(e) {
  * @since 1.0.0
  */
 self.addEventListener('push', function(e) {
-
+    console.log('SW on Push ===>', e);
 });
